@@ -12,7 +12,7 @@ public class Client {
     public Client(){
         try {
             System.out.println("正在连接服务器...");
-            socket = new Socket("127.0.0.1",20);
+            socket = new Socket("localhost",8088);
             System.out.println("与服务端建立连接!");
         } catch (IOException e) {
             e.printStackTrace();
