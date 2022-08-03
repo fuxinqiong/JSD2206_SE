@@ -6,6 +6,8 @@ public class ThreadDemo3 {
         t1.start();
 
 
+/*
+
         Runnable r2 = new Runnable() {
             @Override
             public void run() {
@@ -15,7 +17,25 @@ public class ThreadDemo3 {
                 System.out.println("你好呀");
             }
         };
+*/
+/*
+        Runnable r2 = ()-> {
+                for (int i=0;i<10;i++){
+                    System.out.println("第二个线程跑起来了");
+                }
+                System.out.println("你好呀");
+
+        };
         Thread t2 = new Thread(r2);
+
+*/
+        Thread t2 = new Thread(()-> {
+            for (int i=0;i<10;i++){
+                System.out.println("第二个线程跑起来了");
+            }
+            System.out.println("你好呀");
+
+        });
         t2.start();
 
     }
