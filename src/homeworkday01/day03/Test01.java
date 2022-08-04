@@ -16,11 +16,15 @@ public class Test01 {
             pw.println("你好，我喜欢你!");
             System.out.println("写出完毕");
 
+            pw.close();
+
 
 
 
         }catch (Exception e ){
             System.out.println("出错了!");
+
+        }finally {
 
         }
     }

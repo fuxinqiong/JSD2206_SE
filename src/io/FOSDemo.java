@@ -27,6 +27,7 @@ public class FOSDemo {
         read = fileInputStream.read();
         read = fileInputStream.read();
         System.out.println(read);
+        fileInputStream.close();
 
 
 
