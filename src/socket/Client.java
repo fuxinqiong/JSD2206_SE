@@ -25,7 +25,7 @@ public class Client {
         //客户端向服务端发送数据，则需要使用socket 获取输出流
         try {
             OutputStream out = socket.getOutputStream();  //通过网络输出流发送字节
-            OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);   //转换流
+            OutputStreamWriter osw = new OutputStreamWriter(out, "UTF-8");   //转换流
             BufferedWriter bw = new BufferedWriter(osw);    //缓冲流
             PrintWriter pw = new PrintWriter(bw,true);  //换行输出流，自动行刷新
             Scanner scanner = new Scanner(System.in);

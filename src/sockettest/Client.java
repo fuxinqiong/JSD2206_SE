@@ -30,12 +30,17 @@ public class Client {
     }
     public void start(){
 
-        //客户端向服务端发送数据,则需要使用socket获取输出流
+        //客户端向服务端发送数据,则需要使用socket获取输出流,write
         try{
             OutputStream out = socket.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw,true);
+
+            //同过socket流读取服务端的输出流read
+            InputStream in = socket.getInputStream();
+            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
 
             Scanner scanner = new Scanner(System.in);
             while(true) {
@@ -43,7 +48,11 @@ public class Client {
                 if("exit".equals(line)){
                     break;
                 }
-                pw.println(line);
+                pw.println(line);   //向服务端发送数据
+
+                //
+                line = br.readLine();
+                System.out.println(line);   //读取服务器返回的消息，并打印出来
             }
         } catch (IOException e) {
             e.printStackTrace();

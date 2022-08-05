@@ -1,9 +1,6 @@
 package sockettest;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -70,14 +67,21 @@ public class Server {
 
         public void run(){
             try {
-                //通过刚接受连接的socket,获取输入流来读取该客户端发送过来的消息
+                //通过刚接受连接的socket,获取输入流来读取该客户端发送过来的消息read
                 InputStream in = socket.getInputStream();
                 InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
                 BufferedReader br = new BufferedReader(isr);
 
+                //通过socket 获取输出流给客户端发送消息write
+                OutputStream out = socket.getOutputStream(); //通过socket 的输出流
+                OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);   //
+                BufferedWriter bw = new BufferedWriter(osw);
+                PrintWriter pw = new PrintWriter(bw,true);
+
                 String line;
                 while((line = br.readLine())!=null) {
                     System.out.println(host+"说:" + line);
+                    pw.println(host +"服务端说："+ line);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
