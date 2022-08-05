@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * 聊天室服务端
@@ -15,6 +16,9 @@ public class Server {
         2:监听该端口,一旦一个客户端连接时,就会返回一个Socket实例与其通讯.(accept()方法的作用)
      */
     private ServerSocket serverSocket;
+
+    //保存所有客户端的输出流用于广播消息
+    private PrintWriter[] allOut = {};
     public Server(){
         try {
             System.out.println("正在启动服务端...");
@@ -66,6 +70,7 @@ public class Server {
         }
 
         public void run(){
+            PrintWriter pw = null;
             try {
                 //通过刚接受连接的socket,获取输入流来读取该客户端发送过来的消息read
                 InputStream in = socket.getInputStream();
@@ -76,17 +81,58 @@ public class Server {
                 OutputStream out = socket.getOutputStream(); //通过socket 的输出流
                 OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);   //
                 BufferedWriter bw = new BufferedWriter(osw);
-                PrintWriter pw = new PrintWriter(bw,true);
+                pw = new PrintWriter(bw,true);  //仅赋值不定义类型。上面已定义
+                synchronized (Server.this) {
+                    //将该输出流存入到共享数组allOut 中、
+                    allOut = Arrays.copyOf(allOut, allOut.length + 1);     //数组扩容
+                    allOut[allOut.length - 1] = pw;       //将当前pw存入一个数组最后一位中，
+                }
+                sendMessage(host+"上线了，当前上线人数："+allOut.length);
 
                 String line;
                 while((line = br.readLine())!=null) {
-                    System.out.println(host+"说:" + line);
-                    pw.println(host +"服务端说："+ line);
+                    sendMessage(host+"说:" + line);
+//                    pw.println(host +"服务端说："+ line);
+
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+//                e.printStackTrace(); //
+            }finally {
+                //处理客户都断开连接后的操作
+                //删除pw 引用 数组，将pw从数组allOut中删除，断开
+                System.out.println(allOut.length);
+                synchronized (Server.this){
+                for (int i = 0; i < allOut.length; i++) {
+                    if (allOut[i] == pw) {     //finally中的为最后的线程，
+                        allOut[i] = allOut[allOut.length - 1];
+                        allOut = Arrays.copyOf(allOut, allOut.length - 1);
+                        break;
+                    }
+                }
+
+                }
+                System.out.println(allOut.length);
+                sendMessage(host +"已断开连接!当前在线人数："+ allOut.length);
+
+//                allOut = Arrays.copyOf()
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+
+
+        private void sendMessage(String message){
+            System.out.println(message);
+//            pw.println(host +"服务端说："+ line);
+            synchronized (Server.this){     //与缩容扩容互斥锁
+                    for (int i = 0; i < allOut.length; i++) {
+                        allOut[i].println(message);
+                    }
+                }
+            }
     }
 
 }

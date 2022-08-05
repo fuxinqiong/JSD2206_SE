@@ -22,13 +22,18 @@ public class Client {
          */
         try {
             System.out.println("正在连接服务端...");
-            socket = new Socket("localhost",8088);
+            socket = new Socket("192.168.14.80",8088);
             System.out.println("与服务端建立连接!");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void start(){
+        //将读取来自服务端消息的线程启动起来
+        ServerHandler serverHandler = new ServerHandler();
+        Thread t = new Thread(serverHandler);
+        t.setDaemon(true);  //设置当前线程为守护线程
+        t.start();
 
         //客户端向服务端发送数据,则需要使用socket获取输出流,write
         try{
@@ -37,12 +42,9 @@ public class Client {
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw,true);
 
-            //同过socket流读取服务端的输出流read
-            InputStream in = socket.getInputStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-            BufferedReader br = new BufferedReader(isr);
 
             Scanner scanner = new Scanner(System.in);
+            System.out.println("请输入你要发送的信息：");
             while(true) {
                 String line = scanner.nextLine();
                 if("exit".equals(line)){
@@ -50,9 +52,9 @@ public class Client {
                 }
                 pw.println(line);   //向服务端发送数据
 
-                //
-                line = br.readLine();
-                System.out.println(line);   //读取服务器返回的消息，并打印出来
+                //移到下面了
+//                line = br.readLine();
+//                System.out.println(line);   //读取服务器返回的消息，并打印出来
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,6 +74,25 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         client.start();
+
+
+    }
+    private class ServerHandler implements Runnable{
+        public void run(){
+            //同过socket流读取服务端的输入流read
+            try {
+                InputStream in = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr);
+
+                String line;
+                while ((line = br.readLine())!=null){
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 }
