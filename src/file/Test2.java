@@ -12,7 +12,7 @@ public class Test2 {
                 public boolean accept(File pathname) {
                     String name = file.getName();
                     System.out.println("正在过滤"+name);
-                    return name.contains("d");
+                    return name.contains("d");  //包含“d”的
                 }
             };
 

@@ -20,7 +20,8 @@ public class PWDemo {
         OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
         int a;
         osw.write("我祈祷拥有你+\n");
-        osw.write("c穿越活鲜鲜取拥抱你\n");
+        osw.write("c穿越活鲜鲜取拥抱你\n" +
+                "kdakfkaj");
         osw.write("写出完毕");
         System.out.println("写出完毕!");
         osw.close();
