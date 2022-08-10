@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML图片插入</title>
+</head>
+<body>
+    <!-- 插入图片-->
+    <img src="http://c.biancheng.net/cpp/templets/new/images/logo.jpg?v=3.944" alt="C语言中文网Logo"><br>
+    <hr/>
+
+    <!-- 设置图片的 宽度和高度， 临时改变，不会改变原图大小-->
+    <img src="../sea.png" alt="图片" width="1080" height="960">
+
+    <picture>
+        <source media="(min-width：1000px )" srcset="sea-large.png">
+        <source media="(max-width：500px )" srcset="sea-small.png">
+        <img src="../sea-default.png" alt="默认图片大小">
+    </picture>
+
+</body>
+</html>
