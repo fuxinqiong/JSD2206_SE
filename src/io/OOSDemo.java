@@ -20,8 +20,9 @@ public class OOSDemo {
         String gender = "男";
         String[] otherInfo = {"技术好","拍片一流","大家的启蒙老师"};
         Person p  = new Person();
+        File file = new File(name+"obj");
         //定义一个输出文件低级流
-        FileOutputStream fos = new FileOutputStream("person.obj");
+        FileOutputStream fos = new FileOutputStream(file);
 
         /**  序列化一个对象输出流 */
         ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -31,7 +32,7 @@ public class OOSDemo {
 
 
 
-        //
+        /**writeObject 不能写write */
         oos.writeObject(p);     //保存文件
         System.out.println("写出完毕!");
         fos.close();
