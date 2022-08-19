@@ -1,12 +1,15 @@
 package reflect;
 
+@AutoRunClass
 public class Person {
     private String name = "张三";
+//    @AutoRunClass
     private int age = 18;
 
+//    @AutoRunClass
     public Person(){}
 
-    public Person(String name, int age) {
+    public Person( String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -19,6 +22,8 @@ public class Person {
                 '}';
     }
 
+//    @AutoRunClass
+    @AutoRunMethod(7)
     public void sayHello(){
         System.out.println(name+"说:hello!");
     }
@@ -34,6 +39,10 @@ public class Person {
 
     public void say(String info){
         System.out.println(name+"说:"+info);
+    }
+    @AutoRunMethod(2)
+    public void eat(){
+        System.out.println("正在干饭!");
     }
     public void say(String info,int count){
         for(int i=1;i<=count;i++) {
