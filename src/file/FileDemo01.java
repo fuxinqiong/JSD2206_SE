@@ -6,7 +6,7 @@ import java.io.File;
  * java.io.file
  * 访问其表示的文件或目录的属性
  */
-public class FileDemo {
+public class FileDemo01 {
     public static void main(String[] args) {
         //绝对路劲的优点是清晰明了，但是缺点是写死了，跨平台性不好
         File file = new File("./demo.txt");     //新建一个file对象，赋值为一个demo.txt 文件

@@ -47,12 +47,14 @@ public class Test5 {
 //                        if (method.isAnnotationPresent(AutoRunMethod.class)){
 //                        }
 
-                        System.out.println("自动调用被标注:" + method.getName() + "()");
-                        method.invoke(obj);
 
                         AutoRunMethod arm = method.getAnnotation(AutoRunMethod.class);//获取标注对象
                         int d = arm.value();    //获取标注的参数
                         System.out.println("参数:"+d);
+
+                        for (int i = 0; i < d; i++) {
+                            method.invoke(obj);
+                        }
 
                     }
                 }
