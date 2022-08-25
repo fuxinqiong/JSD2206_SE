@@ -20,7 +20,7 @@ public class CollectionDemo2 {
 
         System.out.println(c);
 
-        c.getClass();
+//        c.getClass();
 
         /**
          * boolean contains();   受equals影响

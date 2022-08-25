@@ -17,8 +17,8 @@ public class CollectionToArrayDemo {
         c.add("five");
         System.out.println(c);
 
-        //集合转数组
-        String[] array = c.toArray(new String[c.size()]);
+        /**集合转数组   toArray()方法 */
+        String[] array = c.toArray(new String[c.size()]);   //新定义了一个数组
         System.out.println(array);  //
         System.out.println(Arrays.toString(array));
         System.out.println(c);
@@ -26,6 +26,8 @@ public class CollectionToArrayDemo {
         //清除集合中元素
         c.clear();
         System.out.println(c);
+        System.out.println(Arrays.toString(array));
+//        System.out.println(array.toString());
 
         //数组转集合
 

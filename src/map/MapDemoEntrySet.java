@@ -1,11 +1,10 @@
 package map;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class MapDemo2 {
+public class MapDemoEntrySet {
     public static void main(String[] args) {
         Map<String,Integer> map = new HashMap<>();
         //如果Map的value 是包装类，获取value时要用包装类，避免因自动拆装箱导致空指针
@@ -19,17 +18,6 @@ public class MapDemo2 {
         map.put("历史",95);
         System.out.println(map);
 
-        /** 遍历所有的 key **/
-        Set<String> keyset = map.keySet();
-        for (String key: map.keySet()){
-            System.out.println("key:"+key);
-        }
-        System.out.println(keyset);
-
-        /**
-         * Set<Entry> entrySet()    从set集合中获取所有的key和value
-         */
-
         Set<Map.Entry<String , Integer>> entrySet = map.entrySet();
         for (Map.Entry<String,Integer> e: entrySet){
             String key = e.getKey();
@@ -37,23 +25,6 @@ public class MapDemo2 {
             System.out.println(key+":" + value);
 
         }
-
-        /**
-         * Collection values()
-         * 将当前Map中的所有value以一个集合形式返回
-         *
-         */
-
-        Collection<Integer> values = map.values();
-        for (Integer value: values){
-            System.out.println("value:"+ value);
-        }
-
-        /**
-         * JDK8之后，集合和Map都提供了forEach 方法，基于lambda表达式遍历
-         */
-
-
 
     }
 }

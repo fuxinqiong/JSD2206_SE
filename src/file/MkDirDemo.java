@@ -11,7 +11,8 @@ public class MkDirDemo {
         //创建目录，，
 //        File dir = new File("dirdemo");     //注意不能有后缀
 //        File dir = new File("demo1mkdir");
-        File dir = new File("./A/B/C/D/");
+//        File dir = new File("./A/B/C/D/");
+        File dir = new File("demo");
 
 //        dir.createNewFile();
         if (dir.exists()){
