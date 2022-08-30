@@ -1,5 +1,21 @@
 package excetion;
+/**
+    JAVA 异常处理机制
+    JAVA中所有的异常的顶级超类为:Throwable
+    而Throwable下面定义了两个子类型:Error和Exception
+    Error:表示错误，不可挽回的。通常描述的都是系统错误
+    Exception:表示异常，可在程序运行过程中被处理掉的。
+    我们通常仅在异常处理机制中处理Exception
 
+    异常处理机制中的：try-catch
+    语法:
+    try{
+        可能出现异常的代码片段
+    }catch(XXXException e){
+        处理try中出现XXXException的代码
+    }
+
+ */
 import java.nio.charset.StandardCharsets;
 
 /***
