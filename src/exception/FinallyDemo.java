@@ -1,4 +1,4 @@
-package excetion;
+package exception;
 
 /**
  * Finally 处理异常

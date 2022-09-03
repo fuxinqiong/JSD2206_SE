@@ -1,4 +1,4 @@
-package excetion;
+package exception;
 
 /**
  * 异常常用方法

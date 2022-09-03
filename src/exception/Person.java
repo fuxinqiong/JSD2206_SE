@@ -1,4 +1,4 @@
-package excetion;
+package exception;
 
 /**
  * 异常的抛出

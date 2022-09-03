@@ -1,4 +1,4 @@
-package excetion;
+package exception;
 
 /**
  * 年龄不合法异常

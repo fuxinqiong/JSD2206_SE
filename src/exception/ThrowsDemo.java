@@ -1,9 +1,7 @@
-package excetion;
+package exception;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * 子类重写超类含有throws声明异常的方法时，对throws 的重写规则

@@ -1,4 +1,4 @@
-package excetion;
+package exception;
 /**
     JAVA 异常处理机制
     JAVA中所有的异常的顶级超类为:Throwable
@@ -32,7 +32,7 @@ import java.nio.charset.StandardCharsets;
  * }
  *
  */
-public class TryCatchDemo {
+public class TryCatchDemo1 {
     public static void main(String[] args) {
         System.out.println("程序开始了");
 //    try {

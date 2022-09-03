@@ -1,4 +1,4 @@
-package excetion;
+package exception;
 /**
  * 相当于finallyDemo2的代码
  */
